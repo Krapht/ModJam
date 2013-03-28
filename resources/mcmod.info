@@ -1,0 +1,18 @@
+[
+{
+  "modid": "ModJam",
+  "name": "ModJam",
+  "description": "Dunno Yet",
+  "version": "1?",
+  "credits": "Krapht",
+  "logoFile": "",
+  "mcversion": "",
+  "url": "",
+  "updateUrl": "",
+  "authors": [ "Krapht"],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
