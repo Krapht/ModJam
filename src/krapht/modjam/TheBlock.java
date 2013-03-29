@@ -30,8 +30,16 @@ public class TheBlock extends BlockContainer {
 	}
 	
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7,	float par8, float par9) {
-		if (par5EntityPlayer.isSneaking()){
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
+		if (player.inventory.getCurrentItem() != null){
+			if (player.inventory.getCurrentItem().getItem() == ModJam.poker){
+				((TheEntity)world.getBlockTileEntity(x, y, z)).setOrientation(ForgeDirection.VALID_DIRECTIONS[side]);
+				world.markBlockForRenderUpdate(x, y, z);
+				return true;
+			}
+		}
+
+		if (player.isSneaking()){
 			System.out.println("Sneaky!");
 		}
 		return false;
@@ -40,11 +48,11 @@ public class TheBlock extends BlockContainer {
 	}
 	
 	@Override
-	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
-		if (par5EntityPlayer.isSneaking()){
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
+		if (player.isSneaking()){
 			System.out.println("Sneaky!");
 		}
-		super.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
+		super.onBlockClicked(world, x, y, z, player);
 	}
 	
 	@Override

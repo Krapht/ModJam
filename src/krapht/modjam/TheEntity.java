@@ -29,6 +29,11 @@ public class TheEntity extends TileEntity implements IInventory {
 		return orientation;
 	}
 
+	public void setOrientation(ForgeDirection orientation) {
+		this.orientation = orientation;
+		
+	}
+
 	@Override
 	public int getSizeInventory() {
 		if (getInventory() == null) return 0;
