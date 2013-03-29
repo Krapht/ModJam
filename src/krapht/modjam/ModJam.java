@@ -60,6 +60,7 @@ public class ModJam {
 	@Init
 	public void Init(FMLInitializationEvent evt) {
 		ModJamProxy.proxy.registerTileEntities();
+		ModJamProxy.proxy.registerBlockRenders();
 	}
 	
 	@PostInit

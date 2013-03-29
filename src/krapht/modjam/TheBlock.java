@@ -14,6 +14,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TheBlock extends BlockContainer {
 
+	public static int renderType;
+	
 	@SideOnly(Side.CLIENT)
 	private Icon target;
 	@SideOnly(Side.CLIENT)
@@ -90,5 +92,10 @@ public class TheBlock extends BlockContainer {
 	public void registerIcons(IconRegister par1IconRegister) {
 		target = par1IconRegister.registerIcon("modjam:target");
 		other = par1IconRegister.registerIcon("modjam:other");
+	}
+	
+	@Override
+	public int getRenderType() {
+		return this.renderType;
 	}
 }
