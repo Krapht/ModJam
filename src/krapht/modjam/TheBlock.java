@@ -88,7 +88,7 @@ public class TheBlock extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		target = par1IconRegister.registerIcon("ModJam:target");
-		other = par1IconRegister.registerIcon("ModJam:other");
+		target = par1IconRegister.registerIcon("modjam:target");
+		other = par1IconRegister.registerIcon("modjam:other");
 	}
 }
