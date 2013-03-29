@@ -2,12 +2,23 @@ package krapht.modjam;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TheBlock extends BlockContainer {
 
+	@SideOnly(Side.CLIENT)
+	private Icon target;
+	@SideOnly(Side.CLIENT)
+	private Icon other;
+	
 	public TheBlock(int blockId, Material par2Material) {
 		super(blockId, par2Material);
  
@@ -44,6 +55,20 @@ public class TheBlock extends BlockContainer {
 			((TheEntity)tile).refresh();
 		}
 		
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int x, int y, int z, int side) {
+		if (side == ForgeDirection.UP.ordinal()) return target;
+		return other;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		target = par1IconRegister.registerIcon("ModJam:target");
+		other = par1IconRegister.registerIcon("ModJam:other");
 	}
 
 }
