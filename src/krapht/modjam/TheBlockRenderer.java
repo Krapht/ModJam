@@ -41,38 +41,38 @@ public class TheBlockRenderer implements ISimpleBlockRenderingHandler {
 			renderer.uvRotateWest 		= 3;
 			renderer.uvRotateEast 		= 3;
 			break;
-		case NORTH:
-			renderer.uvRotateBottom 	= 3;
-			renderer.uvRotateTop 		= 3;
-			renderer.uvRotateNorth 		= 0;
-			renderer.uvRotateSouth 		= 0;
-			renderer.uvRotateWest 		= 1;
-			renderer.uvRotateEast 		= 1;
-			break;
-		case SOUTH:
-			renderer.uvRotateBottom 	= 0;
-			renderer.uvRotateTop 		= 0;
-			renderer.uvRotateNorth 		= 0;
-			renderer.uvRotateSouth 		= 0;
-			renderer.uvRotateWest 		= 0;
-			renderer.uvRotateEast 		= 0;
-			break;
-		case WEST:
-			renderer.uvRotateBottom 	= 0;
-			renderer.uvRotateTop 		= 0;
-			renderer.uvRotateNorth 		= 0;
-			renderer.uvRotateSouth 		= 0;
-			renderer.uvRotateWest 		= 0;
-			renderer.uvRotateEast 		= 0;
-			break;
-		case EAST:
-			renderer.uvRotateBottom 	= 0;
-			renderer.uvRotateTop 		= 0;
-			renderer.uvRotateNorth 		= 0;
-			renderer.uvRotateSouth 		= 0;
-			renderer.uvRotateWest 		= 0;
-			renderer.uvRotateEast 		= 0;
-			break;			
+//		case NORTH:
+//			renderer.uvRotateBottom 	= 3;
+//			renderer.uvRotateTop 		= 3;
+//			renderer.uvRotateNorth 		= 0;
+//			renderer.uvRotateSouth 		= 0;
+//			renderer.uvRotateWest 		= 1;
+//			renderer.uvRotateEast 		= 1;
+//			break;
+//		case SOUTH:
+//			renderer.uvRotateBottom 	= 0;
+//			renderer.uvRotateTop 		= 0;
+//			renderer.uvRotateNorth 		= 0;
+//			renderer.uvRotateSouth 		= 0;
+//			renderer.uvRotateWest 		= 0;
+//			renderer.uvRotateEast 		= 0;
+//			break;
+//		case WEST:
+//			renderer.uvRotateBottom 	= 2;
+//			renderer.uvRotateTop 		= 1;
+//			renderer.uvRotateNorth 		= 1;
+//			renderer.uvRotateSouth 		= 2;
+//			renderer.uvRotateWest 		= 0;
+//			renderer.uvRotateEast 		= 0;
+//			break;
+//		case EAST:
+//			renderer.uvRotateBottom 	= 1;
+//			renderer.uvRotateTop 		= 2;
+//			renderer.uvRotateNorth 		= 2;
+//			renderer.uvRotateSouth 		= 2;
+//			renderer.uvRotateWest 		= 1;
+//			renderer.uvRotateEast 		= 1;
+//			break;			
 		default:
 			break;
 		
