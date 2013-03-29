@@ -9,6 +9,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -36,6 +37,8 @@ public class TheBlock extends BlockContainer {
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float par7, float par8, float par9) {
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) return false;
+		
 		if (player.inventory.getCurrentItem() != null){
 			if (player.inventory.getCurrentItem().getItem() == ModJam.poker){
 				((TheEntity)world.getBlockTileEntity(x, y, z)).setOrientation(ForgeDirection.VALID_DIRECTIONS[side]);
@@ -48,26 +51,17 @@ public class TheBlock extends BlockContainer {
 			System.out.println("Sneaky!");
 		}
 		return false;
-		//return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer,
-		//par6, par7, par8, par9);
-	}
-	
-	@Override
-	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
-		if (player.isSneaking()){
-			System.out.println("Sneaky!");
-		}
-		super.onBlockClicked(world, x, y, z, player);
 	}
 	
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
 		super.onNeighborBlockChange(world, x, y, z, par5);
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) return;
+		
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		if (tile instanceof TheEntity){
 			((TheEntity)tile).refresh();
 		}
-		
 	}
 	
 	@Override
