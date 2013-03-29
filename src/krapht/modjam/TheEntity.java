@@ -9,29 +9,38 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TheEntity extends TileEntity implements IInventory {
 	
-	private IInventory otherInventory;
+	private TileEntity otherTile;
 	private ForgeDirection orientation = ForgeDirection.UNKNOWN;
 	
-	private TileEntity getOtherTile(){
-		
+	private IInventory getInventory(){
+		if (otherTile == null || otherTile.isInvalid() || !(otherTile instanceof IInventory)) return null;
+		return (IInventory) otherTile;
+	}
+	
+	public void refresh() {
+		if (orientation == ForgeDirection.UNKNOWN){
+			otherTile = null;
+		} else {
+			otherTile = this.worldObj.getBlockTileEntity(this.xCoord + orientation.offsetX, this.yCoord + orientation.offsetY, this.zCoord + orientation.offsetZ);
+		}
 	}
 
 	@Override
 	public int getSizeInventory() {
-		if (!(otherInventory instanceof IInventory)) return 0;
-		return otherInventory.getSizeInventory();
+		if (getInventory() == null) return 0;
+		return getInventory().getSizeInventory();
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int slotNo) {
-		if (!(otherInventory instanceof IInventory)) return null;
-		return otherInventory.getStackInSlot(slotNo);
+		if (getInventory() == null) return null;
+		return getInventory().getStackInSlot(slotNo);
 	}
 
 	@Override
 	public ItemStack decrStackSize(int slotNo, int count) {
-		if (!(otherInventory instanceof IInventory)) return null;
-		return otherInventory.decrStackSize(slotNo, count);
+		if (getInventory() == null) return null;
+		return getInventory().decrStackSize(slotNo, count);
 	}
 
 	@Override
@@ -41,8 +50,8 @@ public class TheEntity extends TileEntity implements IInventory {
 
 	@Override
 	public void setInventorySlotContents(int slotNo, ItemStack itemstack) {
-		if (!(otherInventory instanceof IInventory)) return;
-		otherInventory.setInventorySlotContents(slotNo, itemstack);
+		if (getInventory() == null) return;
+		getInventory().setInventorySlotContents(slotNo, itemstack);
 	}
 
 	@Override
@@ -57,14 +66,14 @@ public class TheEntity extends TileEntity implements IInventory {
 
 	@Override
 	public int getInventoryStackLimit() {
-		if (!(otherInventory instanceof IInventory)) return 0;
-		return otherInventory.getInventoryStackLimit();
+		if (getInventory() == null) return 0;
+		return getInventory().getInventoryStackLimit();
 	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		if (!(otherInventory instanceof IInventory)) return false;
-		return otherInventory.isUseableByPlayer(entityplayer);
+		if (getInventory() == null) return false;
+		return getInventory().isUseableByPlayer(entityplayer);
 	}
 
 	@Override
@@ -80,8 +89,8 @@ public class TheEntity extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isStackValidForSlot(int slotNo, ItemStack itemstack) {
-		if (!(otherInventory instanceof IInventory)) return false;
-		return otherInventory.isStackValidForSlot(slotNo, itemstack);
+		if (getInventory() == null) return false;
+		return getInventory().isStackValidForSlot(slotNo, itemstack);
 	}
 	
 	@Override
