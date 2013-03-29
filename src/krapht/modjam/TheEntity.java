@@ -11,18 +11,32 @@ public class TheEntity extends TileEntity implements IInventory {
 	
 	private TileEntity otherTile;
 	private ForgeDirection orientation = ForgeDirection.UNKNOWN;
+	private boolean needsRefresh;
 	
 	private IInventory getInventory(){
 		if (otherTile == null || otherTile.isInvalid() || !(otherTile instanceof IInventory)) return null;
 		return (IInventory) otherTile;
 	}
 	
-	public void refresh() {
+	public void doRefresh(){
 		if (orientation == ForgeDirection.UNKNOWN){
 			otherTile = null;
 		} else {
 			otherTile = this.worldObj.getBlockTileEntity(this.xCoord + orientation.offsetX, this.yCoord + orientation.offsetY, this.zCoord + orientation.offsetZ);
 		}
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		if (this.needsRefresh){
+			refresh();
+			needsRefresh = false;
+		}
+	}
+	
+	public void refresh() {
+		this.needsRefresh = true;
 	}
 	
 	public ForgeDirection getOrientation(){
@@ -107,6 +121,7 @@ public class TheEntity extends TileEntity implements IInventory {
 		super.readFromNBT(tag);
 		if (tag.hasKey("orientation")){
 			orientation = ForgeDirection.VALID_DIRECTIONS[tag.getInteger("orientation")];
+			refresh();
 		}
 	}
 	
