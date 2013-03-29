@@ -17,9 +17,12 @@ public class TheBlock extends BlockContainer {
 	public static int renderType;
 	
 	@SideOnly(Side.CLIENT)
-	private Icon target;
+	public Icon target;
 	@SideOnly(Side.CLIENT)
-	private Icon other;
+	public Icon other;
+	@SideOnly(Side.CLIENT)
+	public Icon nonTarget;
+	
 	
 	public TheBlock(int blockId, Material par2Material) {
 		super(blockId, par2Material);
@@ -79,8 +82,11 @@ public class TheBlock extends BlockContainer {
 		ForgeDirection orientation = ForgeDirection.VALID_DIRECTIONS[side];
 		TileEntity tile = world.getBlockTileEntity(x, y, z);
 		if (tile instanceof TheEntity){
-			if (((TheEntity)tile).getOrientation() == orientation){
+			TheEntity theEntity = (TheEntity) tile;
+			if (theEntity.getOrientation() == orientation){
 				return target;
+			} else if (theEntity.getOrientation() == orientation.getOpposite()) {
+				return nonTarget;
 			}
 			return other;
 		}
@@ -89,9 +95,10 @@ public class TheBlock extends BlockContainer {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		target = par1IconRegister.registerIcon("modjam:target");
-		other = par1IconRegister.registerIcon("modjam:other");
+	public void registerIcons(IconRegister iconRegister) {
+		target = iconRegister.registerIcon("modjam:target");
+		other = iconRegister.registerIcon("modjam:other");
+		nonTarget = iconRegister.registerIcon("modjam:nontarget");
 	}
 	
 	@Override
