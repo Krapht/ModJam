@@ -41,7 +41,7 @@ public class ModJam {
 	}
 	
 	@Init
-	public void load(FMLInitializationEvent evt) {
+	public void Init(FMLInitializationEvent evt) {
 		ModJamProxy.proxy.registerTileEntities();
 	}
 	
