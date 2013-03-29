@@ -24,6 +24,10 @@ public class TheEntity extends TileEntity implements IInventory {
 			otherTile = this.worldObj.getBlockTileEntity(this.xCoord + orientation.offsetX, this.yCoord + orientation.offsetY, this.zCoord + orientation.offsetZ);
 		}
 	}
+	
+	public ForgeDirection getOrientation(){
+		return orientation;
+	}
 
 	@Override
 	public int getSizeInventory() {
@@ -108,5 +112,4 @@ public class TheEntity extends TileEntity implements IInventory {
 			tag.setInteger("orientation", orientation.ordinal());
 		}
 	}
-
 }

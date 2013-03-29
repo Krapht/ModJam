@@ -59,8 +59,21 @@ public class TheBlock extends BlockContainer {
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int x, int y, int z, int side) {
-		if (side == ForgeDirection.UP.ordinal()) return target;
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
+		return other;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side) {
+		ForgeDirection orientation = ForgeDirection.VALID_DIRECTIONS[side];
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		if (tile instanceof TheEntity){
+			if (((TheEntity)tile).getOrientation() == orientation){
+				return target;
+			}
+			return other;
+		}
 		return other;
 	}
 	
@@ -70,5 +83,4 @@ public class TheBlock extends BlockContainer {
 		target = par1IconRegister.registerIcon("ModJam:target");
 		other = par1IconRegister.registerIcon("ModJam:other");
 	}
-
 }
