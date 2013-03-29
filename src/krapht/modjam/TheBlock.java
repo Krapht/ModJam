@@ -35,5 +35,15 @@ public class TheBlock extends BlockContainer {
 		}
 		super.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
 	}
+	
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
+		super.onNeighborBlockChange(world, x, y, z, par5);
+		TileEntity tile = world.getBlockTileEntity(x, y, z);
+		if (tile instanceof TheEntity){
+			((TheEntity)tile).refresh();
+		}
+		
+	}
 
 }
